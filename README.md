@@ -1,9 +1,5 @@
 # Tiny ImageNet Classification
 
-## Overview
-
-This project demonstrates the solution for the **Image Classification (Tiny ImageNet)** and **Text-Image Search System Design** assessment.
-
 ## 📁 Project Structure
 
 ```text
@@ -24,7 +20,7 @@ This project demonstrates the solution for the **Image Classification (Tiny Imag
 
 -----
 
-## Task 1: Image Classification (Tiny ImageNet)
+## Image Classification (Tiny ImageNet)
 
 ### 1. Data Processing & EDA
 
@@ -85,32 +81,6 @@ The model was trained for 30 epochs on an NVIDIA A100 GPU. Updating the ResNet s
 #### Qualitative Conclusion
 
 Despite the low image resolution, the model shows solid semantic understanding. Achieving a **Top-1 accuracy of 54.49%** surpasses what a standard ResNet typically achieves on this dataset (usually around 45–50% without adjustments). This supports the decision to modify the network to keep more spatial detail in the early layers.
-
------
-
-## Task 2: Text-Image Search System Design
-
-### System Architecture
-
-The system follows a **Dual-Encoder Retrieval** setup with three main stages:
-
-1. **Alignment Training (Building the Bridge):**
-
-    - Because the model from Task 1 is vision-only, I introduce a **Text Encoder** (like DistilBERT) to handle language.
-    - I will add small **Projection Heads** to both the frozen visual backbone and the text encoder so they can be mapped into the same **128-dimensional embedding space**.
-    - I will train both sides with **contrastive learning**, teaching the model to pull matching text–image pairs closer together and push non-matches apart.
-
-2. **Indexing:**
-
-    - All images run once through the Task 1 backbone + projection head to generate embeddings.
-    - These vectors are stored in a **vector database** (FAISS or Milvus) to enable fast lookup later.
-
-3. **Retrieval:**
-
-    - When a user types a query, it’s vectorized (embedded) using the Text Encoder + Projection Head.
-    - An **approximate nearest-neighbor (ANN)** or a **k-nearest neighbors (k-NN)** search finds the closest image embeddings using cosine similarity, Euclidean distance or inner product, returning the most relevant images.
-
-*See `diagrams/text-image-search-diagram.png` for a visual overview.*
 
 -----
 
