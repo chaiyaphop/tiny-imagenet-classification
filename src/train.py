@@ -105,7 +105,7 @@ def run_training(data_dir, batch_size, num_epochs):
     best_acc = 0.0
     os.makedirs("../checkpoints", exist_ok=True)
 
-    print(f"🚀 Training on: {torch.cuda.get_device_name(0)}")
+    print(f"Training on: {torch.cuda.get_device_name(0)}")
     print("-" * 85)
     print(f"{'Epoch':<10} | {'Train Loss':<10} | {'Train Acc':<10} | {'Val Loss':<10} | {'Val Acc':<10} | {'Top-5 Acc':<10}")
     print("-" * 85)
@@ -139,7 +139,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Train Modified ResNet on Tiny ImageNet")
     parser.add_argument('--data_dir', type=str, default='../data/tiny-imagenet-200', help='Path to dataset')
     parser.add_argument('--epochs', type=int, default=30, help='Number of epochs')
-    parser.add_argument('--batch', type=int, default=128, help='Batch size')
+    parser.add_argument('--batch', type=int, default=3072, help='Batch size')
 
     args = parser.parse_args()
 
